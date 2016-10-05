@@ -22,10 +22,12 @@ namespace SoftwarePractice_10.Models
         public DbSet<ContactInfo> ContactInfos{ get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
+            modelBuilder.Ignore<Unit>();
             modelBuilder.Configurations.Add(new Configs.FilmConfig());
             modelBuilder.Configurations.Add(new Configs.UnitConfig());
             modelBuilder.Configurations.Add(new Configs.UserConfig());
+            modelBuilder.Configurations.Add(new Configs.ContactInfoConfig());
+
         }
     }
 }

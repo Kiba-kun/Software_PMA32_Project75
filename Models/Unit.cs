@@ -93,5 +93,3 @@ namespace SoftwarePractice_10.Models
         public string Email { get; set; }
     }
 }
-
-//TODO Config models + set connection string in .config
