@@ -16,7 +16,6 @@ namespace SoftwarePractice_10.Models
         {
 
         }
-
         public DbSet<Film> Films{ get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<MainActor> Actors { get; set; }
@@ -24,6 +23,9 @@ namespace SoftwarePractice_10.Models
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            modelBuilder.Configurations.Add(new Configs.FilmConfig());
+            modelBuilder.Configurations.Add(new Configs.UnitConfig());
+            modelBuilder.Configurations.Add(new Configs.UserConfig());
         }
     }
 }

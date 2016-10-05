@@ -12,6 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using SoftwarePractice_10.Models;
+using System.Diagnostics;
+using System.Data.Entity;
 
 namespace SoftwarePractice_10
 {
@@ -23,6 +26,16 @@ namespace SoftwarePractice_10
         public MainWindow()
         {
             InitializeComponent();
+            Database.SetInitializer(new DatabaseInitializer());
+            using (var db = new MyContext())
+            {
+                db.Films.Load();
+                db.Actors.Load();
+                db.ContactInfos.Load();
+                var query = (from item in db.Users
+                            select item).First();
+                Debug.WriteLine(query.ToString());
+            }
         }
     }
 }

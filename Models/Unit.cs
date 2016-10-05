@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SoftwarePractice_10.Models
 {
@@ -11,6 +12,8 @@ namespace SoftwarePractice_10.Models
     {
         public int Id { get; set; }
     }
+
+    [Table("Films")]
     class Film : Unit
     {
         public Film()
@@ -28,11 +31,13 @@ namespace SoftwarePractice_10.Models
         public int AmountOfAvailableExemplars { get; set; }
     }
 
+    [Table("Users")]
     class User : Unit
     {
         public User()
         {
             Contacts = new HashSet<ContactInfo>();
+            TakenFilms = new HashSet<Film>();
         }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -40,8 +45,23 @@ namespace SoftwarePractice_10.Models
         public virtual HashSet<Film> TakenFilms { get; set; }
         public decimal? MoneyToPay { get; set; }
         public DateTime? ReturnDate { get; set; }
+        public override string ToString()
+        {
+            var res =  this.FirstName + " " + this.LastName + "\t\nContact info:";
+            foreach (var item in Contacts)
+            {
+                res += "\t\n" + item.Adress + "\n" + item.Email + "\n" + item.Phone;                
+            }
+            res += "\nTaken films:";
+            foreach (var item in TakenFilms)
+            {
+                res += "\n'" + item.Name + "'(" + item.Director + ")";
+            }
+            return res;
+        }
     }
 
+    [Table("MainActors")]
     class MainActor : Unit
     {
         public MainActor()
@@ -54,6 +74,7 @@ namespace SoftwarePractice_10.Models
         public virtual HashSet<Film> Films { get; set; }
     }
 
+    [Table("ContactInfo")]
     class ContactInfo : Unit
     {
         [Required]
@@ -72,4 +93,5 @@ namespace SoftwarePractice_10.Models
         public string Email { get; set; }
     }
 }
+
 //TODO Config models + set connection string in .config

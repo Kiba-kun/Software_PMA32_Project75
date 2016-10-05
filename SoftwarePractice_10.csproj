@@ -73,6 +73,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\Configs\ModelConfig.cs" />
+    <Compile Include="Models\DatabaseInitializer.cs" />
     <Compile Include="Models\MyContext.cs" />
     <Compile Include="Models\Unit.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
