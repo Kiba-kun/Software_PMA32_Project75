@@ -23,19 +23,18 @@ namespace SoftwarePractice_10
     /// </summary>
     public partial class MainWindow : Window
     {
+        private Presenters.Presenter _presenter;
         public MainWindow()
         {
             InitializeComponent();
             Database.SetInitializer(new DatabaseInitializer());
-            using (var db = new MyContext())
-            {
-                db.Films.Load();
-                db.Actors.Load();
-                db.ContactInfos.Load();
-                var query = (from item in db.Users
-                            select item).First();
-                Debug.WriteLine(query.ToString());
-            }
+
+            _presenter = new Presenters.Presenter(this);
+
+            var paul = new User { FirstName = "Paul", LastName = "Ohonochenko" };
+            _presenter.AddNewUnit(new ContactInfo { Phone = "2405438", Adress = "Zelena Str", Email = "pahaHuy@gmail.com", User = paul });
+            _presenter.AddNewUnit(new ContactInfo { Phone = "2405438", Adress = "Zelena Str", Email = "ak13019@gmail.com", User = paul });
+
         }
     }
 }

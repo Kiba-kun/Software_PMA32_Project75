@@ -76,6 +76,7 @@
     <Compile Include="Models\DatabaseInitializer.cs" />
     <Compile Include="Models\MyContext.cs" />
     <Compile Include="Models\Unit.cs" />
+    <Compile Include="Presenters\Presenter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
