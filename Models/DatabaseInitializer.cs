@@ -40,7 +40,7 @@ namespace SoftwarePractice_10.Models
                 Phone = "2405438",
                 Email = "ak13019@gmail.com"
             };
-            testUser.Contacts.Add(testUserContactInfo);
+            testUser.Contacts = testUserContactInfo;
             testUser.TakenFilms.Add(testFilm);
 
             context.Films.Add(testFilm);

@@ -20,7 +20,15 @@ namespace SoftwarePractice_10.Models.DataProviders
             this._dbSet = context.Set<TEntity>();
         }
 
-        public virtual IEnumerable<TEntity> Get(
+
+        /// <summary>
+        /// It returns IQueriable to let user configure query w/o previously downloading all stuff.
+        /// </summary>
+        /// <param name="filter"></param>
+        /// <param name="orderBy"></param>
+        /// <param name="includeProperties"></param>
+        /// <returns></returns>
+        public virtual IQueryable<TEntity> Get(
             Expression<Func<TEntity,bool>> filter = null,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
             string includeProperties = "")
@@ -40,11 +48,11 @@ namespace SoftwarePractice_10.Models.DataProviders
 
             if (orderBy != null)
             {
-                return orderBy(query).ToList();
+                return orderBy(query);
             }
             else
             {
-                return query.ToList();
+                return query;
             }
         }
 

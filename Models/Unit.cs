@@ -8,17 +8,18 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SoftwarePractice_10.Models
 {
-    abstract class Unit
+    public abstract class Unit
     {
         public int Id { get; set; }
     }
 
     [Table("Films")]
-    class Film : Unit
+    public class Film : Unit
     {
         public Film()
         {
             MainActors = new HashSet<MainActor>();
+            UsersWithFilm = new HashSet<User>();
         }
         public string Name { get; set; }
         public string Studio { get; set; }
@@ -29,40 +30,44 @@ namespace SoftwarePractice_10.Models
         public byte? Rating { get; set; }
         public int AmountOfReleasedExemplars { get; set; }
         public int AmountOfAvailableExemplars { get; set; }
+        public virtual HashSet<User> UsersWithFilm { get; set; }
     }
 
     [Table("Users")]
-    class User : Unit
+    public class User : Unit
     {
         public User()
         {
-            Contacts = new HashSet<ContactInfo>();
+            //Contacts = new HashSet<ContactInfo>();
             TakenFilms = new HashSet<Film>();
         }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public virtual HashSet<ContactInfo> Contacts{ get; set; }
+        //public virtual HashSet<ContactInfo> Contacts{ get; set; }
+        public virtual ContactInfo Contacts { get; set; }
         public virtual HashSet<Film> TakenFilms { get; set; }
+
         public decimal? MoneyToPay { get; set; }
         public DateTime? ReturnDate { get; set; }
-        public override string ToString()
-        {
-            var res =  this.FirstName + " " + this.LastName + "\t\nContact info:";
-            foreach (var item in Contacts)
-            {
-                res += "\t\n" + item.Adress + "\n" + item.Email + "\n" + item.Phone;                
-            }
-            res += "\nTaken films:";
-            foreach (var item in TakenFilms)
-            {
-                res += "\n'" + item.Name + "'(" + item.Director + ")";
-            }
-            return res;
-        }
+
+        //public override string ToString()
+        //{
+        //    var res =  this.FirstName + " " + this.LastName + "\t\nContact info:";
+        //    foreach (var item in Contacts)
+        //    {
+        //        res += "\t\n" + item.Adress + "\n" + item.Email + "\n" + item.Phone;                
+        //    }
+        //    res += "\nTaken films:";
+        //    foreach (var item in TakenFilms)
+        //    {
+        //        res += "\n'" + item.Name + "'(" + item.Director + ")";
+        //    }
+        //    return res;
+        //}
     }
 
     [Table("MainActors")]
-    class MainActor : Unit
+    public class MainActor : Unit
     {
         public MainActor()
         {
@@ -75,7 +80,7 @@ namespace SoftwarePractice_10.Models
     }
 
     [Table("ContactInfo")]
-    class ContactInfo : Unit
+    public class ContactInfo : Unit
     {
         [Required]
         public virtual User User{ get; set; }

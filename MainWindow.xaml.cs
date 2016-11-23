@@ -29,7 +29,7 @@ namespace SoftwarePractice_10
             InitializeComponent();
             Database.SetInitializer(new DatabaseInitializer());
             _postPresenter = new Presenters.PostPresenter(this);
-
         }
+
     }
 }
