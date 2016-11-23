@@ -7,7 +7,7 @@ using System.Data.Entity;
 
 namespace SoftwarePractice_10.Models
 {
-    class DatabaseInitializer : DropCreateDatabaseAlways<MyContext>
+    class DatabaseInitializer : DropCreateDatabaseIfModelChanges<MyContext>
     {
         protected override void Seed(MyContext context)
         {

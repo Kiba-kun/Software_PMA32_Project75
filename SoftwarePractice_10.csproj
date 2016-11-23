@@ -74,9 +74,12 @@
   <ItemGroup>
     <Compile Include="Models\Configs\ModelConfig.cs" />
     <Compile Include="Models\DatabaseInitializer.cs" />
+    <Compile Include="Models\DataProviders\GenericRepository.cs" />
+    <Compile Include="Models\DataProviders\Repository.cs" />
     <Compile Include="Models\MyContext.cs" />
     <Compile Include="Models\Unit.cs" />
     <Compile Include="Presenters\Presenter.cs" />
+    <Compile Include="Presenters\RepositoryBasedPresenter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -106,6 +109,7 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

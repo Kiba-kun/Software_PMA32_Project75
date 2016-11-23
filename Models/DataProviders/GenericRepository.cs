@@ -18,7 +18,6 @@ namespace SoftwarePractice_10.Models.DataProviders
         {
             this._context = context;
             this._dbSet = context.Set<TEntity>();
-            Get(orderBy: x => x.OrderBy(y => y));
         }
 
         public virtual IEnumerable<TEntity> Get(
