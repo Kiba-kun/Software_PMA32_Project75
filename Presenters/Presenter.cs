@@ -15,7 +15,7 @@ namespace SoftwarePractice_10.Presenters
         ContactInfo,
         Actor
     }
-
+    [Obsolete("First tries")]
     class DataManager
     {
         private MyContext _db;

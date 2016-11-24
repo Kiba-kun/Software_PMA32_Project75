@@ -58,7 +58,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="CustomControls\DialogWindows\Prompt.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="CustomControls\LabeledTextBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomControls\PostPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomControls\UpdatePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -70,8 +82,17 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="CustomControls\DialogWindows\Prompt.xaml.cs">
+      <DependentUpon>Prompt.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CustomControls\LabeledTextBox.xaml.cs">
       <DependentUpon>LabeledTextBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\PostPage.xaml.cs">
+      <DependentUpon>PostPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\UpdatePage.xaml.cs">
+      <DependentUpon>UpdatePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Helpers\PostHelper.cs" />
     <Compile Include="MainWindow.xaml.cs">
@@ -83,11 +104,14 @@
     <Compile Include="Models\Configs\ModelConfig.cs" />
     <Compile Include="Models\DatabaseInitializer.cs" />
     <Compile Include="Models\DataProviders\GenericRepository.cs" />
-    <Compile Include="Models\DataProviders\Repository.cs" />
+    <Compile Include="Models\DataProviders\Interfaces\IGenericRepository.cs" />
+    <Compile Include="Models\DataProviders\UnitOfWork.cs" />
     <Compile Include="Models\MyContext.cs" />
     <Compile Include="Models\Unit.cs" />
+    <Compile Include="Presenters\MenuPresenter.cs" />
     <Compile Include="Presenters\Presenter.cs" />
-    <Compile Include="Presenters\RepositoryBasedPresenter.cs" />
+    <Compile Include="Presenters\PostPagePresenter.cs" />
+    <Compile Include="Presenters\UpdatePagePresenter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

@@ -1,4 +1,5 @@
-﻿using SoftwarePractice_10.Helpers;
+﻿using SoftwarePractice_10.CustomControls;
+using SoftwarePractice_10.Helpers;
 using SoftwarePractice_10.Models;
 using SoftwarePractice_10.Models.DataProviders;
 using System;
@@ -12,36 +13,35 @@ using System.Windows.Documents;
 
 namespace SoftwarePractice_10.Presenters
 {
-    class PostPresenter
+    public class PostPresenter
     {
-        private MainWindow _mainWindow;
+        private PostPage _postPage;
         private UnitOfWork _uof;
-        public PostPresenter(MainWindow mainwindow)
+
+        public PostPresenter(PostPage postpage)
         {
-            _mainWindow = mainwindow;
+            _postPage = postpage;
             _uof = new UnitOfWork();
 
-            //submits
-            _mainWindow.postActor_Submit_Button.Click += PostActor_Submit_Button_Click;
-            _mainWindow.postFilm_Submit_Button.Click += PostFilm_Submit_Button_Click;
-            _mainWindow.postUser_Submit_Button.Click += PostUser_Submit_Button_Click;
+            //submits handlers assignment
+            _postPage.postActor_Submit_Button.Click += PostActor_Submit_Button_Click;
+            _postPage.postFilm_Submit_Button.Click += PostFilm_Submit_Button_Click;
+            _postPage.postUser_Submit_Button.Click += PostUser_Submit_Button_Click;
 
             //additional helper events
-            _mainWindow.PostTabControl.SelectionChanged += PostTabControl_SelectionChanged;
-
+            _postPage.PostTabControl.SelectionChanged += PostTabControl_SelectionChanged;
 
             #region EvenHandlerCorrection
             //handler correctors
-            _mainWindow.postActor_Films_ListBox.SelectionChanged += PostActor_Films_ListBox_SelectionChanged;
-            _mainWindow.postFilm_MainActors_ListBox.SelectionChanged += PostFilm_MainActors_ListBox_SelectionChanged;
-            _mainWindow.postUser_TakenFilms_ListBox.SelectionChanged += PostUser_TakenFilms_ListBox_SelectionChanged;
+            _postPage.postActor_Films_ListBox.SelectionChanged += PostActor_Films_ListBox_SelectionChanged;
+            _postPage.postFilm_MainActors_ListBox.SelectionChanged += PostFilm_MainActors_ListBox_SelectionChanged;
+            _postPage.postUser_TakenFilms_ListBox.SelectionChanged += PostUser_TakenFilms_ListBox_SelectionChanged;
             #endregion
-
         }
 
         private void PostUser_Submit_Button_Click(object sender, RoutedEventArgs e)
         {
-            var takenFilmNames = _mainWindow.postUser_TakenFilms_ListBox.SelectedItems.OfType<string>();
+            var takenFilmNames = _postPage.postUser_TakenFilms_ListBox.SelectedItems.OfType<string>();
             HashSet<Film> takenFilms = new HashSet<Film>();
 
             foreach (var item in takenFilmNames)
@@ -53,21 +53,21 @@ namespace SoftwarePractice_10.Presenters
             {
                 var user = new User
                 {
-                    FirstName = _mainWindow.postUser_FirstName_TextBox.Text,
-                    LastName = _mainWindow.postUser_LastName_TextBox.Text,
+                    FirstName = _postPage.postUser_FirstName_TextBox.Text,
+                    LastName = _postPage.postUser_LastName_TextBox.Text,
                     TakenFilms = takenFilms,
 
                     //TODO make setter for coef of multiplication for MoneyToPay calculation
                     MoneyToPay = takenFilms.Count * 10,
-                    ReturnDate = _mainWindow.postUser_returnDate_DatePicker.DisplayDate
+                    ReturnDate = _postPage.postUser_returnDate_DatePicker.DisplayDate
                 };
 
                 var contactInfo = new ContactInfo
                 {
-                    Adress = _mainWindow.postUser_Adress_TextBox.Text,
-                    Email = _mainWindow.postUser_Email_TextBox.Text,
+                    Adress = _postPage.postUser_Adress_TextBox.Text,
+                    Email = _postPage.postUser_Email_TextBox.Text,
                     User = user,
-                    Phone = _mainWindow.postUser_Phone_TextBox.Text
+                    Phone = _postPage.postUser_Phone_TextBox.Text
                 };
 
                 if (PostHelper.IsModelValid(user) && PostHelper.IsModelValid(contactInfo))
@@ -90,7 +90,7 @@ namespace SoftwarePractice_10.Presenters
 
         private void PostFilm_Submit_Button_Click(object sender, RoutedEventArgs e)
         {
-            var selectedActorFullNames = _mainWindow.postFilm_MainActors_ListBox.SelectedItems.OfType<string>().ToList();
+            var selectedActorFullNames = _postPage.postFilm_MainActors_ListBox.SelectedItems.OfType<string>().ToList();
             HashSet<MainActor> selectedActors = new HashSet<MainActor>();
 
             foreach (var item in selectedActorFullNames)
@@ -105,18 +105,18 @@ namespace SoftwarePractice_10.Presenters
             {
                 var model = new Film
                 {
-                    Name = _mainWindow.postFilm_Name_TextBox.Text,
-                    Studio = _mainWindow.postFilm_Studio_TextBox.Text,
-                    DateOfRelease = _mainWindow.postFilm_SetDOR_DatePicker.SelectedDate??DateTime.Now,
-                    Director = _mainWindow.postFilm_Director_TextBox.Text,
-                    Summary = PostHelper.GetTextFromRichTextBox(_mainWindow.postFilm_Summary_RichTextBox),
+                    Name = _postPage.postFilm_Name_TextBox.Text,
+                    Studio = _postPage.postFilm_Studio_TextBox.Text,
+                    DateOfRelease = _postPage.postFilm_SetDOR_DatePicker.SelectedDate ?? DateTime.Now,
+                    Director = _postPage.postFilm_Director_TextBox.Text,
+                    Summary = PostHelper.GetTextFromRichTextBox(_postPage.postFilm_Summary_RichTextBox),
                     MainActors = selectedActors,
                     Rating = 0,
-                    AmountOfAvailableExemplars = Int32.Parse(_mainWindow.postFilm_AvailbleAmount_TextBox.Text),
-                    AmountOfReleasedExemplars = Int32.Parse(_mainWindow.postFilm_NumOfReleased_TextBox.Text)
+                    AmountOfAvailableExemplars = Int32.Parse(_postPage.postFilm_AvailbleAmount_TextBox.Text),
+                    AmountOfReleasedExemplars = Int32.Parse(_postPage.postFilm_NumOfReleased_TextBox.Text)
                 };
 
-                if(PostHelper.IsModelValid(model))
+                if (PostHelper.IsModelValid(model))
                 {
                     _uof.Films.Insert(model);
                     _uof.Commit();
@@ -140,29 +140,29 @@ namespace SoftwarePractice_10.Presenters
             //Debug.WriteLine(((sender as TabControl).SelectedItem as TabItem).Header);
             string TabHeader = ((sender as TabControl).SelectedItem as TabItem).Header.ToString();
 
-            _mainWindow.postActor_Films_ListBox.Items.Clear();
-            _mainWindow.postUser_TakenFilms_ListBox.Items.Clear();
-            _mainWindow.postFilm_MainActors_ListBox.Items.Clear();
+            _postPage.postActor_Films_ListBox.Items.Clear();
+            _postPage.postUser_TakenFilms_ListBox.Items.Clear();
+            _postPage.postFilm_MainActors_ListBox.Items.Clear();
 
             switch (TabHeader)
             {
                 case "Film":
                     foreach (var item in _uof.Actors.Get())
                     {
-                        _mainWindow.postFilm_MainActors_ListBox.Items.Add(item.FirstName + " " + item.LastName);
+                        _postPage.postFilm_MainActors_ListBox.Items.Add(item.FirstName + " " + item.LastName);
                     }
                     break;
 
                 case "Actor":
                     foreach (var item in _uof.Films.Get())
                     {
-                        _mainWindow.postActor_Films_ListBox.Items.Add(item.Name);
+                        _postPage.postActor_Films_ListBox.Items.Add(item.Name);
                     }
                     break;
                 case "User":
                     foreach (var item in _uof.Films.Get())
                     {
-                        _mainWindow.postUser_TakenFilms_ListBox.Items.Add(item.Name);
+                        _postPage.postUser_TakenFilms_ListBox.Items.Add(item.Name);
                     }
                     break;
                 default:
@@ -172,7 +172,7 @@ namespace SoftwarePractice_10.Presenters
 
         private void PostActor_Submit_Button_Click(object sender, RoutedEventArgs e)
         {
-            var selectedFilmNames = _mainWindow.postActor_Films_ListBox.SelectedItems.OfType<string>().ToList();
+            var selectedFilmNames = _postPage.postActor_Films_ListBox.SelectedItems.OfType<string>().ToList();
             HashSet<Film> selectedFilms = new HashSet<Film>();
 
             foreach (var item in selectedFilmNames)
@@ -184,9 +184,9 @@ namespace SoftwarePractice_10.Presenters
             {
                 var model = new MainActor()
                 {
-                    FirstName = _mainWindow.postActor_FirstName_TextBox.Text,
-                    LastName = _mainWindow.postActor_LastName_TextBox.Text,
-                    Age = (byte)(((DateTime.Now - _mainWindow.postActor_SetDOB_DatePicker.SelectedDate).Value.Days) / 365),
+                    FirstName = _postPage.postActor_FirstName_TextBox.Text,
+                    LastName = _postPage.postActor_LastName_TextBox.Text,
+                    Age = (byte)(((DateTime.Now - _postPage.postActor_SetDOB_DatePicker.SelectedDate).Value.Days) / 365),
                     Films = selectedFilms
                 };
 
@@ -255,5 +255,5 @@ namespace SoftwarePractice_10.Presenters
         #endregion
     }
 
-   
+
 }

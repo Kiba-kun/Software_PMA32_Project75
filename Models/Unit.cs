@@ -8,9 +8,19 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SoftwarePractice_10.Models
 {
-    public abstract class Unit
+    public abstract class Unit:IEqualityComparer<Unit>
     {
         public int Id { get; set; }
+
+        public bool Equals(Unit x, Unit y)
+        {
+            return Id.Equals(y.Id);
+        }
+
+        public int GetHashCode(Unit obj)
+        {
+            return Id.GetHashCode();
+        }
     }
 
     [Table("Films")]

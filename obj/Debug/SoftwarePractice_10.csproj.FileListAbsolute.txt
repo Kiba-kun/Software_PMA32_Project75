@@ -14,3 +14,12 @@ D:\PROGRAMMING\Програмне забезпечення\SoftwarePractice_10\S
 D:\PROGRAMMING\Програмне забезпечення\SoftwarePractice_10\SoftwarePractice_10\obj\Debug\SoftwarePractice_10.pdb
 D:\PROGRAMMING\Програмне забезпечення\SoftwarePractice_10\SoftwarePractice_10\bin\Debug\EntityFramework.dll
 D:\PROGRAMMING\Програмне забезпечення\SoftwarePractice_10\SoftwarePractice_10\bin\Debug\EntityFramework.xml
+D:\PROGRAMMING\Програмне забезпечення\SoftwarePractice_10\SoftwarePractice_10\obj\Debug\CustomControls\LabeledTextBox.g.cs
+D:\PROGRAMMING\Програмне забезпечення\SoftwarePractice_10\SoftwarePractice_10\obj\Debug\SoftwarePractice_10_MarkupCompile.lref
+D:\PROGRAMMING\Програмне забезпечення\SoftwarePractice_10\SoftwarePractice_10\obj\Debug\CustomControls\LabeledTextBox.baml
+D:\PROGRAMMING\Програмне забезпечення\SoftwarePractice_10\SoftwarePractice_10\obj\Debug\CustomControls\PostPage.g.cs
+D:\PROGRAMMING\Програмне забезпечення\SoftwarePractice_10\SoftwarePractice_10\obj\Debug\CustomControls\UpdatePage.g.cs
+D:\PROGRAMMING\Програмне забезпечення\SoftwarePractice_10\SoftwarePractice_10\obj\Debug\CustomControls\PostPage.baml
+D:\PROGRAMMING\Програмне забезпечення\SoftwarePractice_10\SoftwarePractice_10\obj\Debug\CustomControls\UpdatePage.baml
+D:\PROGRAMMING\Програмне забезпечення\SoftwarePractice_10\SoftwarePractice_10\obj\Debug\CustomControls\DialogWindows\Prompt.g.cs
+D:\PROGRAMMING\Програмне забезпечення\SoftwarePractice_10\SoftwarePractice_10\obj\Debug\CustomControls\DialogWindows\Prompt.baml

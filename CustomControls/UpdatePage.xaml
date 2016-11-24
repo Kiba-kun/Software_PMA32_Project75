@@ -1,0 +1,110 @@
+﻿<UserControl x:Class="SoftwarePractice_10.CustomControls.UpdatePage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SoftwarePractice_10.CustomControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="354" d:DesignWidth="651">
+    <Grid>
+        <TabControl x:Name="UpdateTabControl" HorizontalAlignment="Left" Height="354" VerticalAlignment="Top" Width="651" Margin="10,0,0,0">
+            <TabItem Header="Film" Width="75px" Margin="0 0 0 0">
+                <Grid Background="#FFE5E5E5">
+                    <Grid.RowDefinitions >
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox x:Name="updateFilm_Name_TextBox" HorizontalAlignment="Left" Height="23" Margin="10,29,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="194"/>
+                    <TextBox x:Name="updateFilm_Studio_TextBox" HorizontalAlignment="Left" Height="23" Margin="10,92,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="194"/>
+                    <DatePicker x:Name="updateFilm_SetDOR_DatePicker" HorizontalAlignment="Left" Margin="102,122,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="postFilm_Studio_Label" Content="Studio:" HorizontalAlignment="Left" Margin="10,61,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="updateFilm_Name_Label" Content="Name:" HorizontalAlignment="Left" Margin="10,3,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="label_Copy1" Content="Date of release:" HorizontalAlignment="Left" Margin="10,120,0,0" VerticalAlignment="Top"/>
+                    <!--<CustomElements:LabeledTextBox x:Name="PostFilm_NameInput" 
+                                                       Margin="10,169,4,103"
+                                                       Label="Director:"/>-->
+
+                    <RichTextBox x:Name="updateFilm_Summary_RichTextBox" Grid.Column="2" HorizontalAlignment="Left" Height="225" Margin="10,29,0,0" VerticalAlignment="Top" Width="193">
+                        <FlowDocument>
+                            <Paragraph>
+                                <Run Text=""/>
+                            </Paragraph>
+                        </FlowDocument>
+                    </RichTextBox>
+                    <Label x:Name="updateFilm_Summary_Label" Content="Summary" HorizontalAlignment="Left" Margin="10,3,0,0" VerticalAlignment="Top" Grid.Column="2"/>
+                    <ListBox x:Name="updateFilm_MainActors_ListBox"  SelectionMode="Multiple" Grid.Column="1" HorizontalAlignment="Left" Height="283" Margin="10,29,0,0" VerticalAlignment="Top" Width="194"/>
+                    <Label x:Name="updateFilm_Actors_Label" Content="Actors" HorizontalAlignment="Left" Margin="10,3,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                    <Label x:Name="updateFilm_Dircetor_Label" Content="Director:" HorizontalAlignment="Left" Margin="10,146,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="updateFilm_Director_TextBox" HorizontalAlignment="Left" Height="23" Margin="10,177,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="194"/>
+                    <Label x:Name="updateFilm_NumOfReleased_Label" Content="Amount of released:" HorizontalAlignment="Left" Margin="10,205,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="updateFilm_AvailbleAmount_Label" Content="Amount of available:" HorizontalAlignment="Left" Margin="10,259,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="updateFilm_NumOfReleased_TextBox" HorizontalAlignment="Left" Height="23" Margin="10,231,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="194"/>
+                    <TextBox x:Name="updateFilm_AvailbleAmount_TextBox" HorizontalAlignment="Left" Height="23" Margin="10,285,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="194"/>
+                    <Button x:Name="updateFilm_Submit_Button" Content="Submit" Grid.Column="2" HorizontalAlignment="Left" Margin="10,263,0,0" VerticalAlignment="Top" Width="193" Height="49"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Actor" Width="75px">
+                <Grid Background="#FFE5E5E5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label x:Name="updateActor_FirstName_Label" Content="First Name:" HorizontalAlignment="Left" Margin="10,3,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="updateActor_FirstName_TextBox" HorizontalAlignment="Left" Height="23" Margin="10,29,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="194"/>
+                    <Label x:Name="updateActor_LastName_Label" Content="Last Name:" HorizontalAlignment="Left" Margin="10,57,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="updateActor_LastName_TextBox" HorizontalAlignment="Left" Height="23" Margin="11,88,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="194"/>
+                    <Label x:Name="updateActor_Age_Label" Content="Age:" Margin="10,127,134,0" VerticalAlignment="Top"/>
+                    <DatePicker x:Name="updateActor_SetDOB_DatePicker" HorizontalAlignment="Left" Margin="84,129,0,0" VerticalAlignment="Top" Width="120"/>
+                    <ListBox x:Name="updateActor_Films_ListBox"                                  
+                                 SelectionMode="Multiple"
+                                 Grid.Column="1" 
+                                 HorizontalAlignment="Left" Height="283" 
+                                 Margin="10,29,0,0" VerticalAlignment="Top" Width="194"
+                                  />
+                    <Label x:Name="updateActor_Films_Label" Content="First Name:" HorizontalAlignment="Left" Margin="10,3,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                    <Button x:Name="updateActor_Submit_Button" Content="Submit" Grid.Column="2" HorizontalAlignment="Left" Margin="10,263,0,0" VerticalAlignment="Top" Width="193" Height="49"/>
+
+                </Grid>
+            </TabItem>
+            <TabItem  Header="User" Width="75px" >
+                <Grid Background="#FFE5E5E5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label x:Name="updateUser_FirstName_Label" Content="First Name:" HorizontalAlignment="Left" Margin="10,3,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="updateUser_FirstName_TextBox" HorizontalAlignment="Left" Height="23" Margin="10,29,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="194"/>
+                    <Label x:Name="updateUser_LastName_Label" Content="Last Name:" HorizontalAlignment="Left" Margin="10,57,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="updateUser_LastName_TextBox" HorizontalAlignment="Left" Height="23" Margin="11,88,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="194"/>
+                    <ListBox x:Name="updateUser_TakenFilms_ListBox"  SelectionMode="Multiple" Grid.Column="1" HorizontalAlignment="Left" Height="260" Margin="10,29,0,0" VerticalAlignment="Top" Width="194"/>
+                    <Label x:Name="updateUser_TakenFilms_Label" Content="Taken films:" HorizontalAlignment="Left" Margin="10,-2,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                    <Label x:Name="updateUser_ReturnDate_Label" Content="Return date:" HorizontalAlignment="Left" Margin="10,294,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                    <DatePicker x:Name="updateUser_returnDate_DatePicker" Grid.Column="1" HorizontalAlignment="Left" Margin="90,295,0,0" VerticalAlignment="Top" Width="114"/>
+                    <Label x:Name="label" Content="Contact Information" Grid.Column="2" HorizontalAlignment="Left" Margin="10,0,0,298" Width="193" HorizontalContentAlignment="Center" FontWeight="Bold"/>
+                    <Label x:Name="updateUser_Phone_Label" Content="Phone:" HorizontalAlignment="Left" Margin="10,29,0,0" VerticalAlignment="Top" Grid.Column="2"/>
+                    <Label x:Name="updateUser_Adress_Label" Content="Adress:" HorizontalAlignment="Left" Margin="10,78,0,0" VerticalAlignment="Top" Grid.Column="2"/>
+                    <Label x:Name="updateUser_Email_Label" Content="Email:" HorizontalAlignment="Left" Margin="10,127,0,0" VerticalAlignment="Top" Grid.Column="2"/>
+                    <TextBox x:Name="updateUser_Phone_TextBox" HorizontalAlignment="Left" Height="23" Margin="10,55,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="194" Grid.Column="2"/>
+                    <TextBox x:Name="updateUser_Adress_TextBox" HorizontalAlignment="Left" Height="23" Margin="10,104,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="194" Grid.Column="2"/>
+                    <TextBox x:Name="updateUser_Email_TextBox" HorizontalAlignment="Left" Height="23" Margin="10,153,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="194" Grid.Column="2"/>
+                    <Button x:Name="updateUser_Submit_Button" Content="Submit" Grid.Column="2" HorizontalAlignment="Left" Margin="10,266,0,0" VerticalAlignment="Top" Width="193" Height="49"/>
+
+                </Grid>
+            </TabItem>
+
+        </TabControl>
+    </Grid>
+</UserControl>

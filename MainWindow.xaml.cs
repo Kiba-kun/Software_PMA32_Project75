@@ -23,12 +23,14 @@ namespace SoftwarePractice_10
     /// </summary>
     public partial class MainWindow : Window
     {
-        private Presenters.PostPresenter _postPresenter;
+        //private Presenters.PostPresenter _postPresenter;
+        private Presenters.MenuPresenter _menuPresenter;
         public MainWindow()
         {
             InitializeComponent();
             Database.SetInitializer(new DatabaseInitializer());
-            _postPresenter = new Presenters.PostPresenter(this);
+            _menuPresenter = new Presenters.MenuPresenter(this);
+            //_postPresenter = new Presenters.PostPresenter(this);
         }
 
     }

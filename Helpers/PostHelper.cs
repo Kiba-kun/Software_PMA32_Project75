@@ -70,6 +70,11 @@ namespace SoftwarePractice_10.Helpers
             return new TextRange(rtb.Document.ContentStart, rtb.Document.ContentEnd).Text;
         }
 
+        public static void ClearTextInRichTextBox(RichTextBox rtb)
+        {
+            rtb.Document.Blocks.Clear();
+        }
+
         public static void ShowSuccesMessage(string customizedMessage = "")
         {
             if (string.IsNullOrEmpty(customizedMessage))

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SoftwarePractice_10.Models.DataProviders.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SoftwarePractice_10.Models.DataProviders
 {
-    class GenericRepository<TEntity>
+    class GenericRepository<TEntity> : IGenericRepository<TEntity>
         where TEntity: class
     {
         private MyContext _context;
