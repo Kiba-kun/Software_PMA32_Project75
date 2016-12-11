@@ -23,3 +23,5 @@ D:\PROGRAMMING\Програмне забезпечення\SoftwarePractice_10\S
 D:\PROGRAMMING\Програмне забезпечення\SoftwarePractice_10\SoftwarePractice_10\obj\Debug\CustomControls\UpdatePage.baml
 D:\PROGRAMMING\Програмне забезпечення\SoftwarePractice_10\SoftwarePractice_10\obj\Debug\CustomControls\DialogWindows\Prompt.g.cs
 D:\PROGRAMMING\Програмне забезпечення\SoftwarePractice_10\SoftwarePractice_10\obj\Debug\CustomControls\DialogWindows\Prompt.baml
+D:\PROGRAMMING\Програмне забезпечення\SoftwarePractice_10\SoftwarePractice_10\obj\Debug\CustomControls\GetInfoPage.g.cs
+D:\PROGRAMMING\Програмне забезпечення\SoftwarePractice_10\SoftwarePractice_10\obj\Debug\CustomControls\GetInfoPage.baml

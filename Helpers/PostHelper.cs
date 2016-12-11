@@ -51,10 +51,10 @@ namespace SoftwarePractice_10.Helpers
 
             if (model as ContactInfo != null)
             {
-                Regex phoneRegex = new Regex(@"^\d{7, 15}$");
+                Regex phoneRegex = new Regex(@"^(\d){7,15}$");
                 Regex mailRegex = new Regex(@"^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$");
                 var conInf = model as ContactInfo;
-                if (phoneRegex.IsMatch(conInf.Email)
+                if (phoneRegex.IsMatch(conInf.Phone) == true
                     && conInf.User != null && conInf.Adress.Length <= 25)
                 {
                     return true;

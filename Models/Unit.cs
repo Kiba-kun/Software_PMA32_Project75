@@ -41,6 +41,7 @@ namespace SoftwarePractice_10.Models
         public int AmountOfReleasedExemplars { get; set; }
         public int AmountOfAvailableExemplars { get; set; }
         public virtual HashSet<User> UsersWithFilm { get; set; }
+
     }
 
     [Table("Users")]

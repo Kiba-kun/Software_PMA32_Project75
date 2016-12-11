@@ -75,7 +75,7 @@ namespace SoftwarePractice_10.Presenters
                     _uof.ContactInfos.Insert(contactInfo);
                     _uof.Commit();
 
-                    PostHelper.ShowSuccesMessage("Make sure that all fields filled correctly!\n(Phone only via digets, email w/o forbidden symbols, etc)");
+                    PostHelper.ShowSuccesMessage("Operation succeded!");
                     return;
                 }
 

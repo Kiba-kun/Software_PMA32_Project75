@@ -9,11 +9,24 @@ namespace SoftwarePractice_10.Presenters
 {
     class MenuPresenter
     {
-        private MainWindow _mainWindow;
+        private readonly MainWindow _mainWindow;
+
+        private readonly UpdatePage _updPage;
+        private readonly PostPage _postPage;
+        private readonly GetInfoPage _getInfoPage;
 
         public MenuPresenter(MainWindow mw)
         {
             _mainWindow = mw;
+
+            _updPage = new UpdatePage();
+            new UpdatePagePresenter(_updPage);
+
+            _postPage = new PostPage();
+            new PostPresenter(_postPage);
+
+            _getInfoPage = new GetInfoPage();
+            new GetInfoPresenter(_getInfoPage);
 
             _mainWindow.Menu_PostButton.Click += Menu_PostButton_Click;
             _mainWindow.Menu_GetDataButton.Click += Menu_GetDataButton_Click;
@@ -29,19 +42,17 @@ namespace SoftwarePractice_10.Presenters
 
         private void Menu_UpdateButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            _mainWindow.contentControl.Content = new UpdatePage();
-            new UpdatePagePresenter(_mainWindow.contentControl.Content as UpdatePage);
+            _mainWindow.contentControl.Content = _updPage;
         }
 
         private void Menu_GetDataButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            _mainWindow.contentControl.Content = _getInfoPage;
         }
 
         private void Menu_PostButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            _mainWindow.contentControl.Content = new PostPage();
-            new PostPresenter(_mainWindow.contentControl.Content as PostPage);
+            _mainWindow.contentControl.Content = _postPage;
         }
     }
 }

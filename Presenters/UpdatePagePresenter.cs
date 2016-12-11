@@ -3,10 +3,7 @@ using SoftwarePractice_10.CustomControls.DialogWindows;
 using SoftwarePractice_10.Models.DataProviders;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -16,8 +13,8 @@ namespace SoftwarePractice_10.Presenters
 {
     class UpdatePagePresenter
     {
-        private UpdatePage _updatePage;
-        private UnitOfWork _uof;
+        private readonly UpdatePage _updatePage;
+        private readonly UnitOfWork _uof;
 
         public UpdatePagePresenter(UpdatePage postpage)
         {
@@ -50,6 +47,7 @@ namespace SoftwarePractice_10.Presenters
            
         }
 
+        #region Fixes
         private void UpdateUser_TakenFilms_ListBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             e.Handled = true;
@@ -64,6 +62,7 @@ namespace SoftwarePractice_10.Presenters
         {
             e.Handled = true;
         }
+        #endregion
 
         private void UpdateUser_Submit_Button_Click(object sender, RoutedEventArgs e)
         {
@@ -105,6 +104,7 @@ namespace SoftwarePractice_10.Presenters
                 {
                     _uof.ContactInfos.Update(queryContactInfo);
                     _uof.Users.Update(queryUser);
+                    _uof.Commit();
 
                     MessageBox.Show("Succes!");
                     return;
@@ -134,7 +134,7 @@ namespace SoftwarePractice_10.Presenters
         private async Task<string> GetNameByPrompt(IEnumerable<string> list)
         {
             //here we choose which item we will update
-            Prompt prompt = new Prompt(list);
+            var prompt = new Prompt(list);
 
             var task = Dispatcher.CurrentDispatcher.BeginInvoke(new Func<bool?>(prompt.ShowDialog));
             await task;
@@ -185,16 +185,59 @@ namespace SoftwarePractice_10.Presenters
                     break;
 
                 case "Actor":
+                    var stringified = await GetNameByPrompt(_uof.Actors.Get().Select(x => x.FirstName + " " + x.LastName).ToList());
+                    var choosenActor = _uof.Actors.Get(x => (x.FirstName + " " + x.LastName) == stringified, null, "Films").First();
+
                     foreach (var item in _uof.Films.Get().ToList())
                     {
+                        if (choosenActor.Films.Contains(item))
+                        {
+                            _updatePage.updateActor_Films_ListBox.SelectedItems.Add(item.Name);
+                        }
+
                         _updatePage.updateActor_Films_ListBox.Items.Add(item.Name);
                     }
+
+                    #region Here we set values to controls
+                    _updatePage.updateActor_FirstName_TextBox.Text = choosenActor.FirstName;
+                    _updatePage.updateActor_LastName_TextBox.Text = choosenActor.LastName;
+                    _updatePage.updateActor_SetDOB_DatePicker.DisplayDate = 
+                        DateTime.Parse("01/01/" + (DateTime.Now.Year - choosenActor.Age).ToString());
+                    #endregion
+
                     break;
                 case "User":
+                    string userStringified = await GetNameByPrompt(_uof.Users.Get()
+                        .Select(x => x.FirstName + " " + x.LastName).ToList());
+
+                    string[] fname_lname = userStringified.Split(' ');
+
+                    string fName = fname_lname[0];
+                    string lName = fname_lname[1];
+
+                    var user = _uof.Users.Get(x => x.FirstName == fName && x.LastName == lName, null, "TakenFilms").First();
+                    var userContacts = _uof.ContactInfos.GetById(user.Id);
+
                     foreach (var item in _uof.Films.Get().ToList())
                     {
+                        if (user.TakenFilms.Contains(item))
+                        {
+                            _updatePage.updateUser_TakenFilms_ListBox.SelectedItems.Add(item.Name);
+                        }
                         _updatePage.updateUser_TakenFilms_ListBox.Items.Add(item.Name);
                     }
+
+                    #region Here we set values to controls
+                    _updatePage.updateUser_Adress_TextBox.Text = userContacts.Adress;
+                    _updatePage.updateUser_Email_TextBox.Text = userContacts.Email;
+                    _updatePage.updateUser_Phone_TextBox.Text = userContacts.Phone;
+
+                    _updatePage.updateUser_FirstName_TextBox.Text = user.FirstName;
+                    _updatePage.updateUser_LastName_TextBox.Text = user.LastName;
+                    _updatePage.updateUser_returnDate_DatePicker.DisplayDate = user.ReturnDate??DateTime.Now;
+
+                    userContacts.User = user;
+                    #endregion
                     break;
                 default:
                     break;
