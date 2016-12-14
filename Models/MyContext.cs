@@ -5,8 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
 
-
-
 namespace SoftwarePractice_10.Models
 {
     class MyContext : DbContext
@@ -20,6 +18,7 @@ namespace SoftwarePractice_10.Models
         public DbSet<User> Users { get; set; }
         public DbSet<MainActor> Actors { get; set; }
         public DbSet<ContactInfo> ContactInfos{ get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Ignore<Unit>();

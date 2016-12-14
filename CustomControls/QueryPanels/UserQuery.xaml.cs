@@ -13,27 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SoftwarePractice_10.CustomControls
+namespace SoftwarePractice_10.CustomControls.QueryPanels
 {
     /// <summary>
-    /// Interaction logic for UpdatePage.xaml
+    /// Interaction logic for UserQuery.xaml
     /// </summary>
-    public partial class UpdatePage : UserControl
+    public partial class UserQuery : UserControl
     {
-        public UpdatePage()
+        public UserQuery()
         {
             InitializeComponent();
-            updateFilm_ratingCBox.SelectedIndex = 4;
-        }
-
-        private void ComboBoxItem_Selected(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

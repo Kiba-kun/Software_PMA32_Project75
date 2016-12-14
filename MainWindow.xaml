@@ -3,22 +3,25 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="SoftwarePractice_10.MainWindow"
-        Title="MainWindow" Height="445.75" Width="679">
+        Title="MainWindow" Height="445.75" Width="685">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="339*"/>
+            <ColumnDefinition Width="338*"/>
+        </Grid.ColumnDefinitions>
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                 <GradientStop Color="#121212" Offset="1"/>
                 <GradientStop Color="#EEEEEE"/>
             </LinearGradientBrush>
         </Grid.Background>
-        <Menu x:Name="HeaderMenu" Height="47" VerticalAlignment="Top" Background="#FF2C2C2C">
+        <Menu x:Name="HeaderMenu" Height="47" VerticalAlignment="Top" Background="#FF2C2C2C" HorizontalAlignment="Stretch" Grid.ColumnSpan="2">
             <Button x:Name="Menu_PostButton" Background="{x:Null}" Height="41" Width="152" BorderBrush="{x:Null}" Foreground="WhiteSmoke" Content="Post" BorderThickness="0"/>
             <Button x:Name="Menu_GetDataButton" Background="{x:Null}" Height="41" Width="152" BorderBrush="{x:Null}" Foreground="WhiteSmoke" Content="Get data" BorderThickness="0"/>
             <Button x:Name="Menu_UpdateButton" Background="{x:Null}" Height="41" Width="152" BorderBrush="{x:Null}" Foreground="WhiteSmoke" Content="Edit" BorderThickness="0"/>
             <Button x:Name="Menu_DeleteButton" Background="{x:Null}" Height="41" Width="152" BorderBrush="{x:Null}" Foreground="WhiteSmoke" Content="Delete" BorderThickness="0" Margin="0px"/>
         </Menu>
-        <ContentControl HorizontalAlignment="Left" Margin="0,52,0,0" VerticalAlignment="Top" Height="364" Width="671" x:Name="contentControl">
-        </ContentControl>
+        <ContentControl Margin="0,52,0,0" x:Name="contentControl" Grid.ColumnSpan="2" Width="677" Height="364" />
 
     </Grid>
 </Window>

@@ -37,7 +37,14 @@ namespace SoftwarePractice_10.Presenters
 
         private void Menu_DeleteButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            try
+            {
+                throw new NotImplementedException();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         private void Menu_UpdateButton_Click(object sender, System.Windows.RoutedEventArgs e)

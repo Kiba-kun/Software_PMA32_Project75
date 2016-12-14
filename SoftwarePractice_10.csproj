@@ -74,6 +74,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="CustomControls\QueryPanels\FilmsSelector.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomControls\QueryPanels\UserQuery.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="CustomControls\UpdatePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -97,6 +105,12 @@
     </Compile>
     <Compile Include="CustomControls\PostPage.xaml.cs">
       <DependentUpon>PostPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\QueryPanels\FilmsSelector.xaml.cs">
+      <DependentUpon>FilmsSelector.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\QueryPanels\UserQuery.xaml.cs">
+      <DependentUpon>UserQuery.xaml</DependentUpon>
     </Compile>
     <Compile Include="CustomControls\UpdatePage.xaml.cs">
       <DependentUpon>UpdatePage.xaml</DependentUpon>
@@ -149,7 +163,10 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="AddtitionalContent\push-512.png" />
+    <Content Include="AddtitionalContent\завантаження.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

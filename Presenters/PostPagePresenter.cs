@@ -58,7 +58,7 @@ namespace SoftwarePractice_10.Presenters
                     TakenFilms = takenFilms,
 
                     //TODO make setter for coef of multiplication for MoneyToPay calculation
-                    MoneyToPay = takenFilms.Count * 10,
+                    MoneyToPay = takenFilms.Count * 15,
                     ReturnDate = _postPage.postUser_returnDate_DatePicker.DisplayDate
                 };
 
@@ -84,7 +84,7 @@ namespace SoftwarePractice_10.Presenters
             }
             catch (Exception)
             {
-                MessageBox.Show("Error.Please, check if fields are written up correcrly.");
+                MessageBox.Show("Error.Please, check if fields are written up correcrly.", "Error :(", MessageBoxButton.OK);
             }
         }
 
@@ -111,7 +111,7 @@ namespace SoftwarePractice_10.Presenters
                     Director = _postPage.postFilm_Director_TextBox.Text,
                     Summary = PostHelper.GetTextFromRichTextBox(_postPage.postFilm_Summary_RichTextBox),
                     MainActors = selectedActors,
-                    Rating = 0,
+                    Rating = 1,
                     AmountOfAvailableExemplars = Int32.Parse(_postPage.postFilm_AvailbleAmount_TextBox.Text),
                     AmountOfReleasedExemplars = Int32.Parse(_postPage.postFilm_NumOfReleased_TextBox.Text)
                 };
@@ -129,7 +129,7 @@ namespace SoftwarePractice_10.Presenters
             }
             catch (Exception)
             {
-                MessageBox.Show("Error.Please, check if fields are written up correcrly.");
+                MessageBox.Show("Error.Please, check if fields are written up correcrly.", "Error :(", MessageBoxButton.OK);
             }
         }
 
@@ -203,39 +203,9 @@ namespace SoftwarePractice_10.Presenters
             }
             catch (Exception)
             {
-                MessageBox.Show("Error.Please, check if fields are written up correcrly.");
+                MessageBox.Show("Error.Please, check if fields are written up correcrly.", "Error :(", MessageBoxButton.OK);
             }
         }
-
-
-
-        //private void PostActor_Submit_Click(object sender, RoutedEventArgs e)
-        //{
-        //    try
-        //    {
-        //        var model = new MainActor
-        //        {
-        //            FirstName = _mainWindow.PostActor_FirstName_TextBox.Text,
-        //            LastName = _mainWindow.PostActor_LastName_TextBox.Text,
-        //            Age = Byte.Parse(_mainWindow.PostActor_AgeTextBox.Text)
-        //        };
-        //        if (Helper.IsModelValid(model))
-        //        {
-        //            _uof.Actors.Insert(model);
-        //            _uof.Commit();
-        //            return;
-        //        }
-
-        //        throw new Exception();
-        //    }
-        //    catch (Exception)
-        //    {
-        //        //MessageBox.Show("Enter approptiate values to the fields!");
-        //        throw;
-        //    }
-        //}
-
-        #region EventHandlerCorrections
 
         //The TabControl.SelectionChanged is the same event as a ComboBox.SelectionChanged
         //so we need to apply this fixes to let it work correct
@@ -251,8 +221,6 @@ namespace SoftwarePractice_10.Presenters
         {
             e.Handled = true;
         }
-
-        #endregion
     }
 
 

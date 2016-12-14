@@ -8,6 +8,15 @@
              d:DesignHeight="354" d:DesignWidth="651">
     <Grid>
         <TabControl x:Name="UpdateTabControl" HorizontalAlignment="Left" Height="354" VerticalAlignment="Top" Width="651" Margin="10,0,0,0">
+            <!--<TabControl.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Choose" Click="MenuItem_Click">
+                        <MenuItem.Icon>
+                            <Image Source="D:\PROGRAMMING\Програмне забезпечення\SoftwarePractice_10\SoftwarePractice_10\AddtitionalContent\push-512.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </ContextMenu>
+            </TabControl.ContextMenu>-->
             <TabItem Header="Film" Width="75px" Margin="0 0 0 0">
                 <Grid Background="#FFE5E5E5">
                     <Grid.RowDefinitions >
@@ -24,11 +33,12 @@
                     <Label x:Name="postFilm_Studio_Label" Content="Studio:" HorizontalAlignment="Left" Margin="10,61,0,0" VerticalAlignment="Top"/>
                     <Label x:Name="updateFilm_Name_Label" Content="Name:" HorizontalAlignment="Left" Margin="10,3,0,0" VerticalAlignment="Top"/>
                     <Label x:Name="label_Copy1" Content="Date of release:" HorizontalAlignment="Left" Margin="10,120,0,0" VerticalAlignment="Top"/>
+                   
                     <!--<CustomElements:LabeledTextBox x:Name="PostFilm_NameInput" 
                                                        Margin="10,169,4,103"
                                                        Label="Director:"/>-->
 
-                    <RichTextBox x:Name="updateFilm_Summary_RichTextBox" Grid.Column="2" HorizontalAlignment="Left" Height="225" Margin="10,29,0,0" VerticalAlignment="Top" Width="193">
+                    <RichTextBox x:Name="updateFilm_Summary_RichTextBox" Grid.Column="2" HorizontalAlignment="Left" Height="202" Margin="10,29,0,0" VerticalAlignment="Top" Width="193">
                         <FlowDocument>
                             <Paragraph>
                                 <Run Text=""/>
@@ -45,6 +55,14 @@
                     <TextBox x:Name="updateFilm_NumOfReleased_TextBox" HorizontalAlignment="Left" Height="23" Margin="10,231,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="194"/>
                     <TextBox x:Name="updateFilm_AvailbleAmount_TextBox" HorizontalAlignment="Left" Height="23" Margin="10,285,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="194"/>
                     <Button x:Name="updateFilm_Submit_Button" Content="Submit" Grid.Column="2" HorizontalAlignment="Left" Margin="10,263,0,0" VerticalAlignment="Top" Width="193" Height="49"/>
+                    <Label x:Name="updateFilm_ratingLable" Content="Rating:" Grid.Column="2" HorizontalAlignment="Left" Margin="10,236,0,0" VerticalAlignment="Top" Height="22" FontSize="9.333"/>
+                    <ComboBox x:Name="updateFilm_ratingCBox" Grid.Column="2" HorizontalAlignment="Left" Margin="54,236,0,0" VerticalAlignment="Top" Width="149">
+                        <ComboBoxItem>1</ComboBoxItem>
+                        <ComboBoxItem>2</ComboBoxItem>
+                        <ComboBoxItem>3</ComboBoxItem>
+                        <ComboBoxItem>4</ComboBoxItem>
+                        <ComboBoxItem>5</ComboBoxItem>
+                    </ComboBox >
                 </Grid>
             </TabItem>
             <TabItem Header="Actor" Width="75px">
@@ -69,12 +87,13 @@
                                  HorizontalAlignment="Left" Height="283" 
                                  Margin="10,29,0,0" VerticalAlignment="Top" Width="194"
                                   />
-                    <Label x:Name="updateActor_Films_Label" Content="First Name:" HorizontalAlignment="Left" Margin="10,3,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                    <Label x:Name="updateActor_Films_Label" Content="Participations in films:" HorizontalAlignment="Left" Margin="10,3,0,0" VerticalAlignment="Top" Grid.Column="1"/>
                     <Button x:Name="updateActor_Submit_Button" Content="Submit" Grid.Column="2" HorizontalAlignment="Left" Margin="10,263,0,0" VerticalAlignment="Top" Width="193" Height="49"/>
 
                 </Grid>
             </TabItem>
             <TabItem  Header="User" Width="75px" >
+                
                 <Grid Background="#FFE5E5E5">
                     <Grid.RowDefinitions>
                         <RowDefinition/>
@@ -104,7 +123,8 @@
 
                 </Grid>
             </TabItem>
-
         </TabControl>
+        <TextBox x:Name="choosen_unitId" Visibility="Hidden"></TextBox>
     </Grid>
+    
 </UserControl>

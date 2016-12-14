@@ -27,9 +27,16 @@ namespace SoftwarePractice_10
         private Presenters.MenuPresenter _menuPresenter;
         public MainWindow()
         {
-            InitializeComponent();
-            Database.SetInitializer(new DatabaseInitializer());
-            _menuPresenter = new Presenters.MenuPresenter(this);
+            try
+            {
+                InitializeComponent();
+                //Database.SetInitializer(new DatabaseInitializer());
+                _menuPresenter = new Presenters.MenuPresenter(this);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Critical error ocured, please reference to you system administrator");
+            }
             //_postPresenter = new Presenters.PostPresenter(this);
         }
 

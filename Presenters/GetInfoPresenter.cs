@@ -8,6 +8,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using SoftwarePractice_10.CustomControls;
 using SoftwarePractice_10.Models.DataProviders;
+using SoftwarePractice_10.CustomControls.QueryPanels;
 
 namespace SoftwarePractice_10.Presenters
 {
@@ -25,15 +26,49 @@ namespace SoftwarePractice_10.Presenters
         private readonly UnitOfWork _uof = new UnitOfWork();
         private readonly DataGrid _dataGrid;
         private readonly TextBox _searchField;
+        private string selectedField = "";
 
         public GetInfoPresenter(GetInfoPage infoPage)
         {
             _infoPage = infoPage;
             _dataGrid = _infoPage.getData_dataGrid;
             _searchField = _infoPage.searchField_textBox;
-            _infoPage.searchButton.Click += SearchButton_Click;
 
+            _infoPage.searchButton.Click += SearchButton_Click;
+            _infoPage.Exit_Button.Click += Exit_Button_Click;
+            _infoPage.ClearGrid_Button.Click += ClearGrid_Button_Click;
             //_infoPage.getData_dataGrid.ItemsSource = _uof.Actors.Get();
+
+            _infoPage.searchIn_comboBox.SelectionChanged += SearchIn_comboBox_SelectionChanged;
+        }
+
+        private void SearchIn_comboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string tabHeader = ((sender as ComboBox).SelectedItem as ComboBoxItem).Content.ToString();
+            Debug.WriteLine(tabHeader);
+            selectedField = tabHeader;
+            switch (tabHeader)
+            {
+                case "Films":
+                    _infoPage.selectedQuery_contentControll.Content = new FilmsSelector();
+                    break;
+                case "Actors":
+                    _infoPage.selectedQuery_contentControll.Content = new UserQuery();
+                    break;
+                case "Users":
+                    _infoPage.selectedQuery_contentControll.Content = null;
+                    break;
+            }
+        }
+
+        private void ClearGrid_Button_Click(object sender, RoutedEventArgs e)
+        {
+            ClearDataGrid();
+        }
+
+        private void Exit_Button_Click(object sender, RoutedEventArgs e)
+        {
+            Window.GetWindow(_infoPage).Close();
         }
 
         private void SearchButton_Click(object sender, System.Windows.RoutedEventArgs e)
@@ -83,12 +118,34 @@ namespace SoftwarePractice_10.Presenters
                             new DataGridTextColumn{ Header = "Studio", Binding = new Binding("Studio"), MaxWidth = 200, ElementStyle = style},
                             new DataGridTextColumn{ Header = "Director", Binding = new Binding("Director"), MaxWidth = 200, ElementStyle = style },
                             new DataGridTextColumn{ Header = "DateOfRelease", Binding = new Binding("DateOfRelease"), MaxWidth = 200, ElementStyle = style },
-                            new DataGridTextColumn {Header = "Actors", Binding = new Binding("Actors"), MaxWidth = 200, ElementStyle = style }
+                            new DataGridTextColumn {Header = "Actors", Binding = new Binding("Actors"), MaxWidth = 200, ElementStyle = style },
+                            new DataGridTextColumn {Header = "Rating", Binding = new Binding("Rating"), MaxWidth = 200, ElementStyle = style },
+                            new DataGridTextColumn {Header = "Amount available", Binding = new Binding("Amount"), MaxWidth = 200, ElementStyle = style }
+
                         };
+
+                        var control = _infoPage.selectedQuery_contentControll.Content as FilmsSelector;
+                        int lowerAm = 0, upperAm = int.MaxValue, lowrRating = 1, upperRatin = 5;
+
+                        if (control != null)
+                        {
+                            if (!int.TryParse(control.amF_tb.Text, out lowerAm))
+                                lowerAm = 0;
+                            if (!int.TryParse(control.amTo_tb.Text, out upperAm))
+                                upperAm = int.MaxValue;
+                            if (!int.TryParse(control.ratingF_tb.Text, out lowrRating))
+                                lowrRating = 1;
+                            if (!int.TryParse(control.ratingTo_tb.Text, out upperRatin))
+                                upperRatin = 5;
+                        }
+
+
                         var query = _uof.Films
-                            .Get(x => x.Name.Contains(searchTag) || x.Studio.Contains(searchTag)
+                            .Get(x => (x.Name.Contains(searchTag) || x.Studio.Contains(searchTag)
                             || x.Director.Contains(searchTag)
-                            || x.MainActors.Select(a => a.FirstName + a.LastName).FirstOrDefault(a => a.Contains(searchTag)) != null,
+                            || x.MainActors.Select(a => a.FirstName + a.LastName).FirstOrDefault(a => a.Contains(searchTag)) != null)
+                            && (x.AmountOfAvailableExemplars >= lowerAm && x.AmountOfAvailableExemplars <= upperAm
+                            && x.Rating >= lowrRating && x.Rating <= upperRatin),
                             null, "MainActors")
                             .Select(y => new
                             {
@@ -96,7 +153,9 @@ namespace SoftwarePractice_10.Presenters
                                 Studio = y.Studio,
                                 Director = y.Director,
                                 DateOfRelease = y.DateOfRelease,
-                                Actors = (y.MainActors.Select(a => a.FirstName + " " + a.LastName + "\n"))
+                                Actors = (y.MainActors.Select(a => a.FirstName + " " + a.LastName + "\n")),
+                                Rating = y.Rating ?? 0,
+                                Amount = y.AmountOfAvailableExemplars
                             }).ToList();
 
                         foreach (var item in filmColumns)
@@ -111,7 +170,9 @@ namespace SoftwarePractice_10.Presenters
                                 Studio = item.Studio,
                                 Director = item.Director,
                                 DateOfRelease = item.DateOfRelease,
-                                Actors = string.Join("", item.Actors.Select(a => a).ToList())
+                                Actors = string.Join("", item.Actors.Select(a => a).ToList()),
+                                Rating = item.Rating,
+                                Amount = item.Amount
                             };
                             _dataGrid.Items.Add(itemToBeAdded);
                         }
@@ -157,6 +218,7 @@ namespace SoftwarePractice_10.Presenters
                         }
                         break;
                     case ChoosenSection.Users:
+
                         this.ClearDataGrid();
                         var userColumns = new List<DataGridColumn>
                         {
@@ -187,6 +249,13 @@ namespace SoftwarePractice_10.Presenters
                                 Binding = new Binding("TakenFilms"),
                                 MaxWidth = 200,
                                 ElementStyle = style
+                            },
+                            new DataGridTextColumn
+                            {
+                                Header = "Arrears",
+                                Binding = new Binding("Arrears"),
+                                MaxWidth = 200,
+                                ElementStyle = style
                             }
                         };
                         foreach (var item in userColumns)
@@ -195,14 +264,15 @@ namespace SoftwarePractice_10.Presenters
                         }
                         var userQuery =
                             _uof.Users.Get(x => x.FirstName.Contains(searchTag)
-                                                || x.LastName.Contains(searchTag)
-                                                || x.TakenFilms.FirstOrDefault(y => y.UsersWithFilm.Contains(x)) != null,
+                                                || x.LastName.Contains(searchTag) || x.TakenFilms.FirstOrDefault(f => f.Name.Contains(searchTag)) != null,
                                 null, "TakenFilms,Contacts").Select(z => new
                                 {
                                     FirstName = z.FirstName,
                                     LastName = z.LastName,
                                     Contacts = z.Contacts,
-                                    TakenFilms = z.TakenFilms.Where(f => f.UsersWithFilm.Contains(z)).Select(f => f.Name)
+                                    //TakenFilms = z.TakenFilms.Where(f => f.UsersWithFilm.Contains(z)).Select(f => f.Name),
+                                    TakenFilms = z.TakenFilms.Select(f => f.Name),
+                                    Arrears = z.MoneyToPay
                                 }).ToList();
                         foreach (var item in userQuery)
                         {
@@ -211,7 +281,8 @@ namespace SoftwarePractice_10.Presenters
                                 FirstName = item.FirstName,
                                 LastName = item.LastName,
                                 Contacts = "Adress: " + item.Contacts.Adress + "\nEmail: " + item.Contacts.Email + "\nPhone: " + item.Contacts.Phone,
-                                TakenFilms = string.Join("\n", item.TakenFilms)
+                                TakenFilms = string.Join("\n", item.TakenFilms),
+                                Arrears = item.Arrears
                             });
                         }
 
