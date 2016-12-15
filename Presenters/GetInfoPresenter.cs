@@ -40,6 +40,17 @@ namespace SoftwarePractice_10.Presenters
             //_infoPage.getData_dataGrid.ItemsSource = _uof.Actors.Get();
 
             _infoPage.searchIn_comboBox.SelectionChanged += SearchIn_comboBox_SelectionChanged;
+
+            _infoPage.print_Button.Click += Print_Button_Click;
+        }
+
+        private void Print_Button_Click(object sender, RoutedEventArgs e)
+        {
+            PrintDialog pd = new PrintDialog();
+            if (pd.ShowDialog() == true)
+            {
+                pd.PrintVisual(_infoPage.getData_dataGrid, "Customized selection");
+            }
         }
 
         private void SearchIn_comboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -53,10 +64,12 @@ namespace SoftwarePractice_10.Presenters
                     _infoPage.selectedQuery_contentControll.Content = new FilmsSelector();
                     break;
                 case "Actors":
-                    _infoPage.selectedQuery_contentControll.Content = new UserQuery();
+                    _infoPage.selectedQuery_contentControll.Content = null;
                     break;
                 case "Users":
-                    _infoPage.selectedQuery_contentControll.Content = null;
+                    _infoPage.selectedQuery_contentControll.Content = new UserQuery();
+                    (_infoPage.selectedQuery_contentControll.Content as UserQuery).asc_rB.IsChecked = true;
+                    (_infoPage.selectedQuery_contentControll.Content as UserQuery).quantity_cB.SelectedIndex = 0;
                     break;
             }
         }
@@ -114,6 +127,7 @@ namespace SoftwarePractice_10.Presenters
                         this.ClearDataGrid();
                         var filmColumns = new List<DataGridColumn>
                         {
+                            new DataGridTextColumn{ Header = "Id", Binding = new Binding("Id"), MaxWidth = 200, ElementStyle = style},
                             new DataGridTextColumn{ Header = "Name", Binding = new Binding("Name"), MaxWidth = 200, ElementStyle = style},
                             new DataGridTextColumn{ Header = "Studio", Binding = new Binding("Studio"), MaxWidth = 200, ElementStyle = style},
                             new DataGridTextColumn{ Header = "Director", Binding = new Binding("Director"), MaxWidth = 200, ElementStyle = style },
@@ -149,6 +163,7 @@ namespace SoftwarePractice_10.Presenters
                             null, "MainActors")
                             .Select(y => new
                             {
+                                Id = y.Id,
                                 Name = y.Name,
                                 Studio = y.Studio,
                                 Director = y.Director,
@@ -166,6 +181,7 @@ namespace SoftwarePractice_10.Presenters
                         {
                             var itemToBeAdded = new
                             {
+                                Id = item.Id,
                                 Name = item.Name,
                                 Studio = item.Studio,
                                 Director = item.Director,
@@ -182,6 +198,7 @@ namespace SoftwarePractice_10.Presenters
                         this.ClearDataGrid();
                         var actorColumns = new List<DataGridColumn>
                         {
+                            new DataGridTextColumn{ Header = "Id", Binding = new Binding("Id"), MaxWidth = 200, ElementStyle = style},
                             new DataGridTextColumn{ Header = "First name", Binding = new Binding("FirstName"), MaxWidth = 200, ElementStyle = style},
                             new DataGridTextColumn{ Header = "Last name", Binding = new Binding("LastName"), MaxWidth = 200, ElementStyle = style},
                             new DataGridTextColumn{ Header = "Age", Binding = new Binding("Age"), MaxWidth = 200, ElementStyle = style},
@@ -196,11 +213,13 @@ namespace SoftwarePractice_10.Presenters
                             .Select(
                                 x => new
                                 {
+                                    Id = x.Id,
                                     FirsName = x.FirstName,
                                     LastName = x.LastName,
                                     Age = x.Age,
                                     Films = x.Films.Select(y => y.Name + "\n")
                                 }).ToList();
+
                         foreach (var item in actorColumns)
                         {
                             _dataGrid.Columns.Add(item);
@@ -209,6 +228,7 @@ namespace SoftwarePractice_10.Presenters
                         {
                             var itemToBeAdded = new
                             {
+                                Id = item.Id,
                                 FirstName = item.FirsName,
                                 LastName = item.LastName,
                                 Age = item.Age,
@@ -218,10 +238,24 @@ namespace SoftwarePractice_10.Presenters
                         }
                         break;
                     case ChoosenSection.Users:
+                        var userControl = _infoPage.selectedQuery_contentControll.Content as UserQuery;
+
+                        int amountOfQueryItems;
+                        if (!int.TryParse(userControl.quantity_cB.Text, out amountOfQueryItems))
+                        {
+                            amountOfQueryItems = 5;
+                        }
 
                         this.ClearDataGrid();
                         var userColumns = new List<DataGridColumn>
                         {
+                            new DataGridTextColumn
+                            {
+                                Header = "Id",
+                                Binding = new Binding("Id"),
+                                MaxWidth = 200,
+                                ElementStyle = style
+                            },
                             new DataGridTextColumn
                             {
                                 Header = "First name",
@@ -262,22 +296,28 @@ namespace SoftwarePractice_10.Presenters
                         {
                             _dataGrid.Columns.Add(item);
                         }
+
+
+
                         var userQuery =
                             _uof.Users.Get(x => x.FirstName.Contains(searchTag)
                                                 || x.LastName.Contains(searchTag) || x.TakenFilms.FirstOrDefault(f => f.Name.Contains(searchTag)) != null,
-                                null, "TakenFilms,Contacts").Select(z => new
+                                q => ((bool)userControl.asc_rB.IsChecked) ? q.OrderBy(d => d.TakenFilms.Count) : q.OrderByDescending(d => d.TakenFilms.Count),
+                                "TakenFilms,Contacts").Select(z => new
                                 {
+                                    Id = z.Id,
                                     FirstName = z.FirstName,
                                     LastName = z.LastName,
                                     Contacts = z.Contacts,
                                     //TakenFilms = z.TakenFilms.Where(f => f.UsersWithFilm.Contains(z)).Select(f => f.Name),
                                     TakenFilms = z.TakenFilms.Select(f => f.Name),
                                     Arrears = z.MoneyToPay
-                                }).ToList();
+                                }).Take(Math.Max(0, amountOfQueryItems)).ToList();
                         foreach (var item in userQuery)
                         {
                             _dataGrid.Items.Add(new
                             {
+                                Id = item.Id,
                                 FirstName = item.FirstName,
                                 LastName = item.LastName,
                                 Contacts = "Adress: " + item.Contacts.Adress + "\nEmail: " + item.Contacts.Email + "\nPhone: " + item.Contacts.Phone,

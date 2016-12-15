@@ -201,9 +201,10 @@ namespace SoftwarePractice_10.Presenters
 
                 throw new Exception();
             }
-            catch (Exception)
+            catch (Exception exc)
             {
-                MessageBox.Show("Error.Please, check if fields are written up correcrly.", "Error :(", MessageBoxButton.OK);
+                //MessageBox.Show("Error.Please, check if fields are written up correcrly.", "Error :(", MessageBoxButton.OK);
+                throw exc;
             }
         }
 

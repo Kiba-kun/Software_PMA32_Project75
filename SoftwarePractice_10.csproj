@@ -58,6 +58,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="CustomControls\DeletePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="CustomControls\DialogWindows\Prompt.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -94,6 +98,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="CustomControls\DeletePage.xaml.cs">
+      <DependentUpon>DeletePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CustomControls\DialogWindows\Prompt.xaml.cs">
       <DependentUpon>Prompt.xaml</DependentUpon>
     </Compile>
@@ -129,6 +136,7 @@
     <Compile Include="Models\DataProviders\UnitOfWork.cs" />
     <Compile Include="Models\MyContext.cs" />
     <Compile Include="Models\Unit.cs" />
+    <Compile Include="Presenters\DeletePresenter.cs" />
     <Compile Include="Presenters\GetInfoPresenter.cs" />
     <Compile Include="Presenters\MenuPresenter.cs" />
     <Compile Include="Presenters\Presenter.cs" />

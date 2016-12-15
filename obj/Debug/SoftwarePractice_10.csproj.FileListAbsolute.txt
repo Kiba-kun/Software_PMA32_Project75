@@ -30,3 +30,5 @@ D:\PROGRAMMING\Програмне забезпечення\SoftwarePractice_10\S
 D:\PROGRAMMING\Програмне забезпечення\SoftwarePractice_10\SoftwarePractice_10\obj\Debug\CustomControls\QueryPanels\FilmsSelector.baml
 D:\PROGRAMMING\Програмне забезпечення\SoftwarePractice_10\SoftwarePractice_10\obj\Debug\CustomControls\QueryPanels\UserQuery.g.cs
 D:\PROGRAMMING\Програмне забезпечення\SoftwarePractice_10\SoftwarePractice_10\obj\Debug\CustomControls\QueryPanels\UserQuery.baml
+D:\PROGRAMMING\Програмне забезпечення\SoftwarePractice_10\SoftwarePractice_10\obj\Debug\CustomControls\DeletePage.g.cs
+D:\PROGRAMMING\Програмне забезпечення\SoftwarePractice_10\SoftwarePractice_10\obj\Debug\CustomControls\DeletePage.baml

@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 D:\PROGRAMMING\Програмне забезпечення\SoftwarePractice_10\SoftwarePractice_10\App.xaml
-8-329578238
+91042554043
 1-443996665
-291150430907
+312014636977
 15-1429422987
-CustomControls\DialogWindows\Prompt.xaml;CustomControls\GetInfoPage.xaml;CustomControls\LabeledTextBox.xaml;CustomControls\PostPage.xaml;CustomControls\QueryPanels\FilmsSelector.xaml;CustomControls\QueryPanels\UserQuery.xaml;CustomControls\UpdatePage.xaml;MainWindow.xaml;
+CustomControls\DeletePage.xaml;CustomControls\DialogWindows\Prompt.xaml;CustomControls\GetInfoPage.xaml;CustomControls\LabeledTextBox.xaml;CustomControls\PostPage.xaml;CustomControls\QueryPanels\FilmsSelector.xaml;CustomControls\QueryPanels\UserQuery.xaml;CustomControls\UpdatePage.xaml;MainWindow.xaml;
 
-False
+True
 

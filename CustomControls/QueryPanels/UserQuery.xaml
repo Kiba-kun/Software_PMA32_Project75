@@ -24,7 +24,7 @@
         <RadioButton x:Name="desc_rB" Content="Descending" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="1" VerticalAlignment="Top" Height="16" Width="82"/>
         <RadioButton x:Name="asc_rB" Content="Ascendin" HorizontalAlignment="Left" Margin="10,31,0,0" Grid.Row="1" VerticalAlignment="Top" Height="16" Width="82"/>
         <Label x:Name="amount_label" Content="Show first:" HorizontalAlignment="Right" Margin="0,10,10,0" FontWeight="Bold" Width="100" Grid.Row="2" Height="33" VerticalAlignment="Top" Grid.RowSpan="2"/>
-        <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Margin="10,4,0,0" Grid.Row="3" VerticalAlignment="Top" Width="100" Height="22">
+        <ComboBox x:Name="quantity_cB" HorizontalAlignment="Left" Margin="10,4,0,0" Grid.Row="3" VerticalAlignment="Top" Width="100" Height="22">
             <ComboBoxItem>5</ComboBoxItem>
             <ComboBoxItem>10</ComboBoxItem>
             <ComboBoxItem>25</ComboBoxItem>
