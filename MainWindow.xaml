@@ -3,7 +3,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="SoftwarePractice_10.MainWindow"
-        Title="MainWindow" Height="445.75" Width="685">
+        Title="MainWindow" Height="445.75" Width="685" Icon="D:\PROGRAMMING\Програмне забезпечення\SoftwarePractice_10\SoftwarePractice_10\AddtitionalContent\Alecive-Flatwoken-Apps-Player-Video.ico">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="339*"/>
@@ -21,7 +21,7 @@
             <Button x:Name="Menu_UpdateButton" Background="{x:Null}" Height="41" Width="152" BorderBrush="{x:Null}" Foreground="WhiteSmoke" Content="Edit" BorderThickness="0"/>
             <Button x:Name="Menu_DeleteButton" Background="{x:Null}" Height="41" Width="152" BorderBrush="{x:Null}" Foreground="WhiteSmoke" Content="Delete" BorderThickness="0" Margin="0px"/>
         </Menu>
-        <ContentControl Margin="0,52,0,0" x:Name="contentControl" Grid.ColumnSpan="2" Width="677" Height="364" />
+        <ContentControl Margin="0,52,0,0" x:Name="contentControl" Grid.ColumnSpan="2"  Width="677" Height="364" />
 
     </Grid>
 </Window>
